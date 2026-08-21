@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import {
   ArrowDown,
   ArrowRight,
+  ArrowUpRight,
   BookOpenText,
   Check,
   Checks,
@@ -504,7 +505,7 @@ function App() {
               <div><dt>Quiz thinking hold</dt><dd>2.0-2.5 s</dd></div>
             </dl>
           </div>
-          <div className="animatic-stage" id="examples">
+          <div className="animatic-stage">
             <div className="animatic-copy">
               <h3>Approve the static film before motion.</h3>
               <p><GlossaryText>This inexpensive gate combines final voices, real timing, deterministic subtitles, music, transitions, and quiz holds.</GlossaryText></p>
@@ -564,6 +565,61 @@ function App() {
           </div>
         </section>
 
+        <section className="examples-section" id="examples">
+          <div className="section-heading compact">
+            <p className="eyebrow">Watch the real output</p>
+            <h2>Examples from finished lessons.</h2>
+            <p><GlossaryText>Every example below is production media from the two HSK 3 films this course is built on: the published master, the animatic that authorized it, an approved motion shot, its temporal evidence, and the voices that were selected.</GlossaryText></p>
+          </div>
+
+          <div className="examples-grid">
+            <figure className="example-card example-wide">
+              <video controls preload="metadata" poster="/media/final-film-excerpt-poster.webp">
+                <source src="/media/final-film-excerpt.mp4" type="video/mp4" />
+              </video>
+              <figcaption>
+                <span className="example-tag">Published master</span>
+                <strong>Final film excerpt</strong>
+                <p><GlossaryText>Eight seconds of the released lesson: approved presenters, locally rendered Chinese and pinyin, selected voices, house music, and paper transitions.</GlossaryText></p>
+              </figcaption>
+            </figure>
+            <figure className="example-card">
+              <video controls preload="metadata" poster="/media/static-animatic-excerpt-poster.webp">
+                <source src="/media/static-animatic-excerpt.mp4" type="video/mp4" />
+              </video>
+              <figcaption>
+                <span className="example-tag">Animatic gate</span>
+                <strong>Static film before motion</strong>
+                <p><GlossaryText>The same lesson as approved keyframes with final audio and real timing, watched end to end before any GPU time is spent.</GlossaryText></p>
+              </figcaption>
+            </figure>
+            <figure className="example-card">
+              <video controls muted loop preload="metadata" poster="/media/motion-shot-poster.webp">
+                <source src="/media/motion-shot.mp4" type="video/mp4" />
+              </video>
+              <figcaption>
+                <span className="example-tag">Approved motion</span>
+                <strong>Paper city shot</strong>
+                <p><GlossaryText>An accepted image-to-video pilot: vehicles move, while the presenter, stage, and pinned props stay coherent.</GlossaryText></p>
+              </figcaption>
+            </figure>
+            <figure className="example-card example-wide">
+              <img src="/media/motion-contact-sheet.webp" alt="Five temporal samples from the same approved moving paper city shot" loading="lazy" />
+              <figcaption>
+                <span className="example-tag">Temporal evidence</span>
+                <strong>Contact sheet for the shot above</strong>
+                <p><GlossaryText>Start, 25%, 50%, 75%, and end frames from the same clip, bound to its hash. Compare the failed and repaired attempts in the motion lesson.</GlossaryText></p>
+              </figcaption>
+            </figure>
+          </div>
+
+          <div className="examples-audio">
+            <div className="audio-lab-header"><Headphones weight="duotone" /><span>Selected voices, level-matched on the same line</span></div>
+            {audioSamples.filter((sample) => sample.selected).map((sample) => <AudioCard key={sample.label} sample={sample} />)}
+            <a className="examples-audio-link" href="#audio">Hear the full free and paid comparison <ArrowRight /></a>
+          </div>
+        </section>
+
         <section className="qa-section" id="qa">
           <div className="section-heading compact">
             <p className="eyebrow">Fail closed</p>
@@ -607,12 +663,24 @@ function App() {
             </a>
           </div>
         </section>
+
+        <section className="about-section" id="about">
+          <div>
+            <p className="eyebrow">About</p>
+            <h2>About this school.</h2>
+          </div>
+          <div className="about-body">
+            <p><GlossaryText>Paper Theater Production School is Jonathan Caras’s open record of how paper-cut Mandarin lessons are actually made: an iPhone, a Telegram thread, an agent on a Linux host, and human approval at every gate that matters. Everything published here comes from real productions, including the attempts that failed.</GlossaryText></p>
+            <a className="about-link" href="https://jonathancaras.com" target="_blank" rel="noreferrer">jonathancaras.com <ArrowUpRight /></a>
+          </div>
+        </section>
       </main>
 
       <footer>
         <div className="footer-brand"><span className="brand-mark" aria-hidden="true"><span /><span /><span /></span><strong>Paper Theater Production School</strong></div>
         <p>Built from two real HSK 3 productions. Failed attempts remain part of the lesson.</p>
         <a href="https://github.com/aliceagent/paper-theater-production-school" target="_blank" rel="noreferrer"><GithubLogo /> Source on GitHub</a>
+        <span className="footer-version">{__APP_VERSION__} · Paper Theater Production School</span>
       </footer>
     </div>
   )

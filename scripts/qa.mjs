@@ -30,7 +30,7 @@ for (const id of ['remote', 'tools', 'system', 'authority', 'audio', 'timing', '
   report.sections[id] = { box, horizontalOverflow: overflow }
   await page.screenshot({ path: `qa/section-${id}.png` })
 }
-for (const [name, selector] of [['remote-flow', '.control-flow'], ['responsibilities', '.responsibility-split'], ['tool-stack', '.stack-grid'], ['hermes-loop', '.hermes-explainer'], ['authority-images', '.authority-grid'], ['motion-evidence', '.motion-showcase'], ['repair-comparison', '.repair-lab']]) {
+for (const [name, selector] of [['remote-flow', '.control-flow'], ['responsibilities', '.responsibility-split'], ['tool-stack', '.stack-grid'], ['hermes-loop', '.hermes-explainer'], ['authority-images', '.authority-grid'], ['motion-evidence', '.motion-showcase'], ['repair-comparison', '.repair-lab'], ['review-gates', '.gate-grid']]) {
   const el = await page.$(selector)
   await el?.screenshot({ path: `qa/component-${name}.png` })
 }
@@ -52,7 +52,7 @@ for (const id of ['remote', 'tools', 'authority', 'motion']) {
   await new Promise((resolve) => setTimeout(resolve, 200))
   await page.screenshot({ path: `qa/mobile-${id}.png` })
 }
-for (const [name, selector] of [['remote-flow', '.control-flow'], ['tool-stack', '.stack-grid'], ['authority-images', '.authority-grid'], ['motion-evidence', '.motion-showcase']]) {
+for (const [name, selector] of [['remote-flow', '.control-flow'], ['tool-stack', '.stack-grid'], ['authority-images', '.authority-grid'], ['motion-evidence', '.motion-showcase'], ['review-gates', '.gate-grid']]) {
   const el = await page.$(selector)
   await el?.screenshot({ path: `qa/mobile-component-${name}.png` })
 }

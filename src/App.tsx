@@ -104,12 +104,55 @@ const audioSamples: AudioSample[] = [
 ]
 
 const gates = [
-  ['Language', 'A qualified Mandarin reviewer checks grammar, naturalness, HSK level, pinyin, neutral tones, and sandhi.'],
-  ['Identity', 'A human approves faces, wardrobe, age impression, warmth, and tactile paper construction.'],
-  ['Animatic', 'The complete static film is judged for artwork, voice performance, timing, music, subtitles, and lesson flow.'],
-  ['Motion', 'Representative pilots prove the motion language before the full batch consumes GPU time.'],
-  ['Release', 'Only an uninterrupted watch of the current hashed master can authorize publication.'],
+  ['language', 'Language', 'A qualified Mandarin reviewer checks grammar, naturalness, HSK level, pinyin, neutral tones, and sandhi.'],
+  ['identity', 'Identity', 'A human approves faces, wardrobe, age impression, warmth, and tactile paper construction.'],
+  ['animatic', 'Animatic', 'The complete static film is judged for artwork, voice performance, timing, music, subtitles, and lesson flow.'],
+  ['motion', 'Motion', 'Representative pilots prove the motion language before the full batch consumes GPU time.'],
+  ['release', 'Release', 'Only an uninterrupted watch of the current hashed master can authorize publication.'],
 ]
+
+function GateVisual({ kind }: { kind: string }) {
+  if (kind === 'language') {
+    return (
+      <div className="gate-visual language-visual" aria-hidden="true">
+        <BookOpenText weight="duotone" />
+        <div><strong>又…又…</strong><span>yòu… yòu…</span><i><Check /> reviewed</i></div>
+      </div>
+    )
+  }
+  if (kind === 'identity') {
+    return (
+      <div className="gate-visual identity-visual" aria-hidden="true">
+        <div className="paper-person coral-person"><i /><span /></div>
+        <div className="paper-person blue-person"><i /><span /></div>
+        <div className="identity-stamp"><Check weight="bold" /></div>
+      </div>
+    )
+  }
+  if (kind === 'animatic') {
+    return (
+      <div className="gate-visual animatic-visual" aria-hidden="true">
+        <FilmSlate weight="duotone" />
+        <div className="mini-filmstrip"><i /><i /><i /></div>
+        <div className="mini-timeline"><span /><span /><span /></div>
+      </div>
+    )
+  }
+  if (kind === 'motion') {
+    return (
+      <div className="gate-visual motion-visual" aria-hidden="true">
+        <div className="motion-frame"><Play weight="fill" /></div>
+        <div className="motion-path"><i /><i /><i /><ArrowRight /></div>
+      </div>
+    )
+  }
+  return (
+    <div className="gate-visual release-visual" aria-hidden="true">
+      <ShieldCheck weight="duotone" />
+      <div><span>SHA-256</span><strong>HASH VERIFIED</strong><i><Check /> human approval</i></div>
+    </div>
+  )
+}
 
 function AudioCard({ sample }: { sample: AudioSample }) {
   const audioRef = useRef<HTMLAudioElement>(null)
@@ -525,9 +568,10 @@ function App() {
             <p>A green dashboard cannot prove natural Mandarin, an appealing face, a comfortable pace, or permission to publish.</p>
           </div>
           <div className="gate-grid">
-            {gates.map(([name, detail], index) => (
-              <article className="gate" key={name}>
-                <span>{String(index + 1).padStart(2, '0')}</span>
+            {gates.map(([kind, name, detail], index) => (
+              <article className={`gate gate-${kind}`} key={kind}>
+                <span className="gate-number">{String(index + 1).padStart(2, '0')}</span>
+                <GateVisual kind={kind} />
                 <h3>{name}</h3>
                 <p>{detail}</p>
               </article>

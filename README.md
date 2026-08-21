@@ -27,9 +27,10 @@ npm run lint
 npm run build
 npm run preview -- --host 127.0.0.1 --port 4173
 npm run qa
+BASE_URL=https://paper-theater-production-school.vercel.app npm run qa
 ```
 
-The QA runner uses the installed Chromium binary at `/snap/bin/chromium`. Change `executablePath` in `scripts/qa.mjs` when running elsewhere.
+The QA runner uses the installed Chromium binary at `/snap/bin/chromium`. Change `executablePath` in `scripts/qa.mjs` when running elsewhere. `BASE_URL` can target any deployed environment; it defaults to the local preview server.
 
 ## Design system
 

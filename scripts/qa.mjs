@@ -1,6 +1,8 @@
 import puppeteer from 'puppeteer-core'
 import fs from 'node:fs/promises'
 
+const baseUrl = process.env.BASE_URL ?? 'http://127.0.0.1:4173'
+
 const browser = await puppeteer.launch({
   executablePath: '/snap/bin/chromium',
   headless: true,
@@ -15,7 +17,7 @@ page.on('requestfailed', (req) => {
   if (!(error === 'net::ERR_ABORTED' && req.resourceType() === 'media')) failed.push(`${req.url()} :: ${error}`)
 })
 await page.setViewport({ width: 1440, height: 1100, deviceScaleFactor: 1 })
-await page.goto('http://127.0.0.1:4173', { waitUntil: 'networkidle0' })
+await page.goto(baseUrl, { waitUntil: 'networkidle0' })
 await new Promise((resolve) => setTimeout(resolve, 1000))
 const report = { sections: {}, errors, failed, mobile: {}, interactions: {} }
 for (const id of ['system', 'authority', 'audio', 'timing', 'motion', 'qa']) {
@@ -32,7 +34,7 @@ await page.evaluate(() => document.querySelector('#motion')?.scrollIntoView())
 await page.click('.repair-tabs button:nth-child(2)')
 report.interactions.repairVerdict = await page.$eval('.verdict', (el) => el.textContent?.trim())
 await page.setViewport({ width: 390, height: 844, deviceScaleFactor: 1 })
-await page.goto('http://127.0.0.1:4173', { waitUntil: 'networkidle0' })
+await page.goto(baseUrl, { waitUntil: 'networkidle0' })
 await new Promise((resolve) => setTimeout(resolve, 900))
 report.mobile.horizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)
 await page.click('.menu-button')

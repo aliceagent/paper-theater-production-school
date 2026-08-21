@@ -38,7 +38,11 @@
 @media (max-width: 560px) {
   .technical-term > svg { width: .72em; height: .72em; }
   .term-card { padding: 17px; }
+  .term-card-kicker { font-size: .68rem; }
   .term-card > p { font-size: .84rem; }
+  .term-role span { font-size: .8rem; }
+  .term-role b { font-size: .72rem; }
+  .term-card > small { font-size: .68rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

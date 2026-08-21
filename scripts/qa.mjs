@@ -20,7 +20,7 @@ await page.setViewport({ width: 1440, height: 1100, deviceScaleFactor: 1 })
 await page.goto(baseUrl, { waitUntil: 'networkidle0' })
 await new Promise((resolve) => setTimeout(resolve, 1000))
 const report = { sections: {}, errors, failed, mobile: {}, interactions: {} }
-for (const id of ['system', 'authority', 'audio', 'timing', 'motion', 'qa']) {
+for (const id of ['remote', 'tools', 'system', 'authority', 'audio', 'timing', 'motion', 'qa']) {
   const el = await page.$(`#${id}`)
   if (!el) throw new Error(`Missing section ${id}`)
   await el.evaluate((node) => node.scrollIntoView({ block: 'start' }))
@@ -29,6 +29,10 @@ for (const id of ['system', 'authority', 'audio', 'timing', 'motion', 'qa']) {
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)
   report.sections[id] = { box, horizontalOverflow: overflow }
   await page.screenshot({ path: `qa/section-${id}.png` })
+}
+for (const [name, selector] of [['remote-flow', '.control-flow'], ['responsibilities', '.responsibility-split'], ['tool-stack', '.stack-grid'], ['hermes-loop', '.hermes-explainer'], ['authority-images', '.authority-grid'], ['motion-evidence', '.motion-showcase'], ['repair-comparison', '.repair-lab']]) {
+  const el = await page.$(selector)
+  await el?.screenshot({ path: `qa/component-${name}.png` })
 }
 await page.evaluate(() => document.querySelector('#motion')?.scrollIntoView())
 await page.click('.repair-tabs button:nth-child(2)')
@@ -41,6 +45,17 @@ await page.click('.menu-button')
 report.mobile.menuVisible = await page.$eval('.mobile-nav', (el) => getComputedStyle(el).display !== 'none')
 report.mobile.primaryCtaFits = await page.$eval('.button-primary', (el) => el.scrollWidth <= el.clientWidth && el.getBoundingClientRect().height < 70)
 await page.screenshot({ path: 'qa/mobile-menu.png' })
+await page.click('.menu-button')
+for (const id of ['remote', 'tools', 'authority', 'motion']) {
+  const el = await page.$(`#${id}`)
+  await el?.evaluate((node) => node.scrollIntoView({ block: 'start' }))
+  await new Promise((resolve) => setTimeout(resolve, 200))
+  await page.screenshot({ path: `qa/mobile-${id}.png` })
+}
+for (const [name, selector] of [['remote-flow', '.control-flow'], ['tool-stack', '.stack-grid'], ['authority-images', '.authority-grid'], ['motion-evidence', '.motion-showcase']]) {
+  const el = await page.$(selector)
+  await el?.screenshot({ path: `qa/mobile-component-${name}.png` })
+}
 report.media = await page.evaluate(() => Array.from(document.querySelectorAll('video source, audio')).map((el) => ({ src: el.getAttribute('src'), ready: el.closest('video')?.readyState ?? el.readyState ?? null })))
 await fs.writeFile('qa/report.json', JSON.stringify(report, null, 2) + '\n')
 console.log(JSON.stringify(report, null, 2))

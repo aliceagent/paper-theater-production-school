@@ -4,6 +4,9 @@ A media-rich instructional website for producing polished paper-cut Mandarin gra
 
 The course is built from two real HSK 3 productions and demonstrates:
 
+- how Jonathan directs the complete studio from an iPhone through Telegram;
+- how Hermes Agent running ChatGPT converts conversation into production work on a Linux host;
+- what runs on owned hardware, what runs locally, which services are hosted, and which calls are paid;
 - lesson and semantic-scene planning;
 - character authority and xAI environment generation;
 - deterministic character compositing and subtitle rendering;
@@ -47,6 +50,8 @@ The QA runner uses the installed Chromium binary at `/snap/bin/chromium`. Change
 The approved and published `又……又……` film supplies the final-film and motion examples. The `我还以为……，没想到……` project supplies the character, environment, keyframe, audition, and static-animatic examples. Its motion stage remains unauthorized.
 
 No credentials, API keys, or private connection data are included.
+
+`MEDIA_MAP.md` records the source and teaching purpose of every published image, poster, audio sample, and video excerpt. Visuals must prove their adjacent claim rather than serve as decoration.
 
 ## Licensing
 

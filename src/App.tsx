@@ -4,6 +4,16 @@ import {
   ArrowRight,
   BookOpenText,
   Check,
+  Checks,
+  Brain,
+  Cloud,
+  Cpu,
+  CurrencyDollar,
+  DeviceMobile,
+  FolderOpen,
+  HardDrives,
+  LockKey,
+  Wrench,
   DownloadSimple,
   FilePdf,
   FilmSlate,
@@ -14,6 +24,7 @@ import {
   Play,
   ShieldCheck,
   SpeakerHigh,
+  TelegramLogo,
   X,
 } from '@phosphor-icons/react'
 import './App.css'
@@ -165,6 +176,8 @@ function App() {
         </a>
         <nav className="desktop-nav" aria-label="Primary navigation">
           <a href="#system">Course</a>
+          <a href="#remote">iPhone control</a>
+          <a href="#tools">Tool stack</a>
           <a href="#examples">Examples</a>
           <a href="#qa">Review gates</a>
           <a className="nav-action" href="/downloads/Paper_Cut_Chinese_Grammar_Video_Production_Manual_v1.3.pdf" download>
@@ -177,6 +190,8 @@ function App() {
         {menuOpen && (
           <nav className="mobile-nav" aria-label="Mobile navigation">
             <a href="#system" onClick={closeMenu}>Course</a>
+            <a href="#remote" onClick={closeMenu}>iPhone control</a>
+            <a href="#tools" onClick={closeMenu}>Tool stack</a>
             <a href="#examples" onClick={closeMenu}>Examples</a>
             <a href="#qa" onClick={closeMenu}>Review gates</a>
             <a href="/downloads/Paper_Cut_Chinese_Grammar_Video_Production_Manual_v1.3.pdf" onClick={closeMenu}>Download manual</a>
@@ -201,8 +216,143 @@ function App() {
             </video>
             <div className="media-caption">
               <span>Approved and published final film</span>
-              <span>18 second excerpt</span>
+              <span>8 second excerpt</span>
             </div>
+          </div>
+        </section>
+
+        <section className="remote-section" id="remote">
+          <div className="section-heading remote-heading">
+            <p className="eyebrow">The phone is the control room</p>
+            <h2>Jonathan runs the studio through Telegram.</h2>
+            <p>He directs the entire production from an iPhone. Hermes Agent, running ChatGPT on a Linux production host, turns conversation into files, renders, QA evidence, deployments, and review media.</p>
+          </div>
+
+          <div className="control-flow" aria-label="Phone operated production architecture">
+            <article className="control-node phone-node">
+              <DeviceMobile weight="duotone" />
+              <div><strong>Jonathan on iPhone</strong><span>Creative direction, corrections, taste, and approval</span></div>
+            </article>
+            <ArrowRight className="flow-arrow" aria-hidden="true" />
+            <article className="control-node telegram-node">
+              <TelegramLogo weight="duotone" />
+              <div><strong>Telegram</strong><span>The conversational production interface</span></div>
+            </article>
+            <ArrowRight className="flow-arrow" aria-hidden="true" />
+            <article className="control-node hermes-node">
+              <Brain weight="duotone" />
+              <div><strong>Hermes Agent + ChatGPT</strong><span>Plans, operates tools, tracks state, and reports evidence</span></div>
+            </article>
+            <ArrowRight className="flow-arrow" aria-hidden="true" />
+            <article className="control-node host-node">
+              <HardDrives weight="duotone" />
+              <div><strong>Production host</strong><span>Models, FFmpeg, files, APIs, GitHub, and Vercel</span></div>
+            </article>
+          </div>
+
+          <div className="responsibility-split">
+            <article>
+              <div className="responsibility-icon"><DeviceMobile /></div>
+              <h3>What Jonathan does from the phone</h3>
+              <ul>
+                <li><Checks /> Explains the lesson goal and desired learner experience</li>
+                <li><Checks /> Listens to voice and music auditions</li>
+                <li><Checks /> Watches animatics, motion pilots, and finished masters</li>
+                <li><Checks /> Reports perceptual problems that automation missed</li>
+                <li><Checks /> Approves identities, direction, corrections, and publication</li>
+              </ul>
+            </article>
+            <article>
+              <div className="responsibility-icon"><HardDrives /></div>
+              <h3>What Hermes does on the host</h3>
+              <ul>
+                <li><Checks /> Converts messages into scripts, manifests, and production plans</li>
+                <li><Checks /> Operates image, audio, motion, and deterministic tools</li>
+                <li><Checks /> Preserves rejected evidence and resumes interrupted work</li>
+                <li><Checks /> Runs decode, hash, visual, timing, and delivery checks</li>
+                <li><Checks /> Returns review media and verified artifacts to Telegram</li>
+              </ul>
+            </article>
+          </div>
+
+          <div className="phone-loop-callout">
+            <TelegramLogo weight="fill" />
+            <p><strong>This is not remote desktop operation.</strong> Jonathan does not sit at the Linux workstation or manually run the production commands. Conversation is the interface. Every important result returns to the same Telegram thread for a human decision.</p>
+          </div>
+        </section>
+
+        <section className="tools-section" id="tools">
+          <div className="section-heading tools-heading">
+            <p className="eyebrow">What runs where</p>
+            <h2>A hybrid studio: owned hardware, local models, and approved API calls.</h2>
+            <p>The pipeline is deliberately split. Heavy repeatable work runs on Jonathan’s own Linux workstation. Hosted services are used where they add leverage, and paid calls are explicit rather than hidden inside the workflow.</p>
+          </div>
+
+          <div className="stack-grid">
+            <article className="stack-card owned-stack">
+              <DeviceMobile weight="duotone" />
+              <div><span>Owned hardware</span><h3>The physical studio</h3></div>
+              <ul>
+                <li>Jonathan’s iPhone for direction and review</li>
+                <li>Owned Linux workstation with NVIDIA GPU</li>
+                <li>Local project storage, caches, masters, and evidence</li>
+                <li>No need for Jonathan to operate the workstation directly</li>
+              </ul>
+            </article>
+            <article className="stack-card local-stack">
+              <Cpu weight="duotone" />
+              <div><span>Local tools and models</span><h3>No per-call generation fee</h3></div>
+              <ul>
+                <li>Python, Pillow, FFmpeg, ffprobe, pypinyin, and hashing</li>
+                <li>Whisper for transcript and audio screening</li>
+                <li>FLUX, SAM, IOPaint/LaMa, and local music tools</li>
+                <li>MiniMax-H3-class image-to-video on the owned GPU</li>
+              </ul>
+            </article>
+            <article className="stack-card service-stack">
+              <Cloud weight="duotone" />
+              <div><span>Hosted services</span><h3>Transport and publication</h3></div>
+              <ul>
+                <li>Telegram carries every instruction and review result</li>
+                <li>Edge TTS provides the selected free voice lane</li>
+                <li>GitHub stores and versions the website source</li>
+                <li>Vercel builds and serves the instructional website</li>
+              </ul>
+            </article>
+            <article className="stack-card paid-stack">
+              <CurrencyDollar weight="duotone" />
+              <div><span>Paid hosted intelligence</span><h3>Calls that require authorization</h3></div>
+              <ul>
+                <li>OpenAI’s ChatGPT provides Hermes Agent’s reasoning brain</li>
+                <li>xAI supplies paid image or voice candidates when approved</li>
+                <li>Paid calls are logged, bounded, and checked for real outputs</li>
+                <li>Secrets stay in protected configuration, never in deliverables</li>
+              </ul>
+            </article>
+          </div>
+
+          <div className="hermes-explainer">
+            <div className="hermes-copy">
+              <Brain weight="duotone" />
+              <h3>ChatGPT is the brain. Hermes is the operating system around it.</h3>
+              <p>ChatGPT interprets Jonathan’s request, reasons about the next action, reviews tool results, and decides what should happen next. Hermes Agent gives that reasoning model controlled access to the production environment and keeps the work coherent across a long project.</p>
+              <div className="brain-boundary"><LockKey /><span>ChatGPT does not receive raw credentials. Hermes exposes approved tools, applies policy, and returns only the results needed for reasoning.</span></div>
+            </div>
+            <ol className="hermes-loop">
+              <li><span>1</span><div><strong>Telegram gateway receives the message</strong><p>The correct chat and topic are attached to a persistent Hermes session.</p></div></li>
+              <li><span>2</span><div><strong>Hermes loads working context</strong><p>Project history, current approvals, skills, memory, and relevant files become available.</p></div></li>
+              <li><span>3</span><div><strong>ChatGPT reasons and chooses tools</strong><p>It may inspect files, run code, call a model, delegate an audit, or ask Jonathan only when a real decision is missing.</p></div></li>
+              <li><span>4</span><div><strong>Hermes executes on the host</strong><p>Tools operate the filesystem, terminal, browsers, media pipelines, GitHub, Vercel, and explicitly authorized APIs.</p></div></li>
+              <li><span>5</span><div><strong>Evidence comes back into the reasoning loop</strong><p>Hashes, decodes, screenshots, contact sheets, transcripts, and errors are reviewed before the next action.</p></div></li>
+              <li><span>6</span><div><strong>Jonathan receives a reviewable result</strong><p>Telegram delivers samples, progress, files, blockers, and approval questions directly to the iPhone.</p></div></li>
+            </ol>
+          </div>
+
+          <div className="management-grid">
+            <div><FolderOpen /><strong>Project state</strong><span>Folders, manifests, stable IDs, hashes, caches, selected assets, and superseded versions</span></div>
+            <div><Wrench /><strong>Production work</strong><span>Image, speech, music, motion, compositing, subtitles, encoding, packaging, and deployment</span></div>
+            <div><Checks /><strong>Quality evidence</strong><span>Decode reports, ASR, frame contracts, contact sheets, visual verdicts, and uninterrupted-review gates</span></div>
+            <div><LockKey /><strong>Approval boundaries</strong><span>Hermes may prepare and qualify. Jonathan alone approves taste, major spend, motion direction, and publication.</span></div>
           </div>
         </section>
 
@@ -247,12 +397,12 @@ function App() {
               <figcaption><strong>Character authority</strong><span>Identity is approved once and hash-bound.</span></figcaption>
             </figure>
             <figure className="authority-card">
-              <img src="/media/xai-environment.webp" alt="Paper theater restaurant environment generated without recurring presenters" loading="lazy" />
-              <figcaption><strong>Environment plate</strong><span>xAI proposes the location and exact semantic props.</span></figcaption>
+              <img src="/media/xai-environment.webp" alt="Umbrella and sun paper theater environment generated without Linlin or Xiaowei" loading="lazy" />
+              <figcaption><strong>xAI environment plate</strong><span>The scene and semantic props arrive without recurring presenters.</span></figcaption>
             </figure>
             <figure className="authority-card">
-              <img src="/media/canonical-composite.webp" alt="Canonical restaurant keyframe with approved presenters composited into the environment" loading="lazy" />
-              <figcaption><strong>Canonical composite</strong><span>Exact presenter cutouts return through deterministic code.</span></figcaption>
+              <img src="/media/canonical-composite.webp" alt="The same umbrella and sun environment with exact approved Linlin and Xiaowei cutouts added at the sides" loading="lazy" />
+              <figcaption><strong>Deterministic composite</strong><span>The same plate now contains the exact approved presenters.</span></figcaption>
             </figure>
           </div>
           <div className="rule-callout">
@@ -331,10 +481,16 @@ function App() {
             <p>Pilot difficult actions first. Strip native model audio, verify the first frame, inspect five temporal samples, and bind the verdict to the clip hash.</p>
           </div>
           <div className="motion-showcase">
-            <video controls muted loop preload="metadata" poster="/media/motion-shot-poster.webp">
-              <source src="/media/motion-shot.mp4" type="video/mp4" />
-            </video>
-            <img src="/media/motion-contact-sheet.webp" alt="Five temporal samples from an approved motion shot" loading="lazy" />
+            <figure>
+              <video controls muted loop preload="metadata" poster="/media/motion-shot-poster.webp">
+                <source src="/media/motion-shot.mp4" type="video/mp4" />
+              </video>
+              <figcaption><strong>Motion review</strong><span>Paper vehicles move through the city while the presenter and stage remain coherent.</span></figcaption>
+            </figure>
+            <figure>
+              <img src="/media/motion-contact-sheet.webp" alt="Five temporal samples from the same approved moving paper city shot" loading="lazy" />
+              <figcaption><strong>Temporal evidence</strong><span>Start, 25%, 50%, 75%, and end frames expose drift that one still cannot show.</span></figcaption>
+            </figure>
           </div>
           <div className="repair-lab">
             <div className="repair-copy">

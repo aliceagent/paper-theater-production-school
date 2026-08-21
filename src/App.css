@@ -87,6 +87,8 @@ h3 { color: var(--primary); letter-spacing: -.025em; }
 .phone-loop-callout p { margin: 0; color: color-mix(in srgb, var(--paper) 76%, transparent); line-height: 1.62; }
 .phone-loop-callout strong { color: var(--paper); }
 .tools-heading { max-width: 1000px; }
+.glossary-hint { margin-top: 24px; padding: 13px 15px; display: flex; gap: 10px; align-items: flex-start; border: 1px solid var(--border); border-radius: 11px; background: var(--surface); color: var(--muted); font-size: .82rem; line-height: 1.5; }
+.glossary-hint svg { width: 18px; height: 18px; flex: 0 0 auto; margin-top: 1px; color: var(--accent); }
 .stack-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
 .stack-card { min-height: 390px; padding: 31px; display: grid; grid-template-rows: auto auto 1fr; border: 1px solid var(--border); border-radius: 18px; background: var(--surface); }
 .stack-card > svg { width: 45px; height: 45px; margin-bottom: 48px; color: var(--accent); }

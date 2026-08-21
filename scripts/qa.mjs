@@ -19,7 +19,7 @@ page.on('requestfailed', (req) => {
 await page.setViewport({ width: 1440, height: 1100, deviceScaleFactor: 1 })
 await page.goto(baseUrl, { waitUntil: 'networkidle0' })
 await new Promise((resolve) => setTimeout(resolve, 1000))
-const report = { sections: {}, errors, failed, mobile: {}, interactions: {} }
+const report = { sections: {}, errors, failed, mobile: {}, interactions: {}, glossary: {} }
 for (const id of ['remote', 'tools', 'system', 'authority', 'audio', 'timing', 'motion', 'qa']) {
   const el = await page.$(`#${id}`)
   if (!el) throw new Error(`Missing section ${id}`)
@@ -34,6 +34,15 @@ for (const [name, selector] of [['remote-flow', '.control-flow'], ['responsibili
   const el = await page.$(selector)
   await el?.screenshot({ path: `qa/component-${name}.png` })
 }
+report.glossary.desktopTermCount = await page.$$eval('.technical-term', (terms) => terms.length)
+await page.hover('.local-stack li:first-child .technical-term')
+await new Promise((resolve) => setTimeout(resolve, 180))
+report.glossary.hoverTitle = await page.$eval('.term-card > strong', (el) => el.textContent?.trim())
+await page.click('.local-stack li:first-child .technical-term')
+await page.mouse.move(2, 2)
+report.glossary.clickPinsCard = Boolean(await page.$('.term-card'))
+await page.keyboard.press('Escape')
+report.glossary.escapeClosesCard = !(await page.$('.term-card'))
 await page.evaluate(() => document.querySelector('#motion')?.scrollIntoView())
 await page.click('.repair-tabs button:nth-child(2)')
 report.interactions.repairVerdict = await page.$eval('.verdict', (el) => el.textContent?.trim())
@@ -56,8 +65,16 @@ for (const [name, selector] of [['remote-flow', '.control-flow'], ['tool-stack',
   const el = await page.$(selector)
   await el?.screenshot({ path: `qa/mobile-component-${name}.png` })
 }
+await page.click('.local-stack li:first-child .technical-term')
+await new Promise((resolve) => setTimeout(resolve, 120))
+report.glossary.mobileCardVisible = Boolean(await page.$('.term-card'))
+report.glossary.mobileCardBounds = await page.$eval('.term-card', (el) => {
+  const rect = el.getBoundingClientRect()
+  return { left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom, viewportWidth: innerWidth, viewportHeight: innerHeight }
+})
+await page.screenshot({ path: 'qa/mobile-glossary.png' })
 report.media = await page.evaluate(() => Array.from(document.querySelectorAll('video source, audio')).map((el) => ({ src: el.getAttribute('src'), ready: el.closest('video')?.readyState ?? el.readyState ?? null })))
 await fs.writeFile('qa/report.json', JSON.stringify(report, null, 2) + '\n')
 console.log(JSON.stringify(report, null, 2))
 await browser.close()
-if (errors.length || failed.length || Object.values(report.sections).some((value) => value.horizontalOverflow > 0) || report.mobile.horizontalOverflow > 0 || !report.mobile.menuVisible || !report.mobile.primaryCtaFits) process.exit(1)
+if (errors.length || failed.length || Object.values(report.sections).some((value) => value.horizontalOverflow > 0) || report.mobile.horizontalOverflow > 0 || !report.mobile.menuVisible || !report.mobile.primaryCtaFits || report.glossary.desktopTermCount < 25 || report.glossary.hoverTitle !== 'Python' || !report.glossary.clickPinsCard || !report.glossary.escapeClosesCard || !report.glossary.mobileCardVisible || report.glossary.mobileCardBounds.left < 0 || report.glossary.mobileCardBounds.right > report.glossary.mobileCardBounds.viewportWidth) process.exit(1)

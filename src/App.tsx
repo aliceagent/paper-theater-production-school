@@ -12,6 +12,7 @@ import {
   DeviceMobile,
   FolderOpen,
   HardDrives,
+  Info,
   LockKey,
   Wrench,
   DownloadSimple,
@@ -28,6 +29,7 @@ import {
   X,
 } from '@phosphor-icons/react'
 import './App.css'
+import { GlossaryText } from './glossary'
 
 type AudioSample = {
   label: string
@@ -178,10 +180,10 @@ function AudioCard({ sample }: { sample: AudioSample }) {
       </button>
       <div>
         <div className="audio-title-row">
-          <h3>{sample.label}</h3>
+          <h3><GlossaryText>{sample.label}</GlossaryText></h3>
           {sample.selected && <span className="selected-label"><Check weight="bold" /> Selected</span>}
         </div>
-        <p>{sample.meta}</p>
+        <p><GlossaryText>{sample.meta}</GlossaryText></p>
       </div>
       <audio ref={audioRef} src={sample.src} preload="metadata" onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)} onEnded={() => setPlaying(false)} />
     </article>
@@ -268,28 +270,28 @@ function App() {
           <div className="section-heading remote-heading">
             <p className="eyebrow">The phone is the control room</p>
             <h2>Jonathan runs the studio through Telegram.</h2>
-            <p>He directs the entire production from an iPhone. Hermes Agent, running ChatGPT on a Linux production host, turns conversation into files, renders, QA evidence, deployments, and review media.</p>
+            <p><GlossaryText>He directs the entire production from an iPhone. Hermes Agent, running ChatGPT on a Linux production host, turns conversation into files, renders, QA evidence, deployments, and review media.</GlossaryText></p>
           </div>
 
           <div className="control-flow" aria-label="Phone operated production architecture">
             <article className="control-node phone-node">
               <DeviceMobile weight="duotone" />
-              <div><strong>Jonathan on iPhone</strong><span>Creative direction, corrections, taste, and approval</span></div>
+              <div><strong><GlossaryText>Jonathan on iPhone</GlossaryText></strong><span>Creative direction, corrections, taste, and approval</span></div>
             </article>
             <ArrowRight className="flow-arrow" aria-hidden="true" />
             <article className="control-node telegram-node">
               <TelegramLogo weight="duotone" />
-              <div><strong>Telegram</strong><span>The conversational production interface</span></div>
+              <div><strong><GlossaryText>Telegram</GlossaryText></strong><span>The conversational production interface</span></div>
             </article>
             <ArrowRight className="flow-arrow" aria-hidden="true" />
             <article className="control-node hermes-node">
               <Brain weight="duotone" />
-              <div><strong>Hermes Agent + ChatGPT</strong><span>Plans, operates tools, tracks state, and reports evidence</span></div>
+              <div><strong><GlossaryText>Hermes Agent + ChatGPT</GlossaryText></strong><span>Plans, operates tools, tracks state, and reports evidence</span></div>
             </article>
             <ArrowRight className="flow-arrow" aria-hidden="true" />
             <article className="control-node host-node">
               <HardDrives weight="duotone" />
-              <div><strong>Production host</strong><span>Models, FFmpeg, files, APIs, GitHub, and Vercel</span></div>
+              <div><strong><GlossaryText>Production host</GlossaryText></strong><span><GlossaryText>Models, FFmpeg, files, APIs, GitHub, and Vercel</GlossaryText></span></div>
             </article>
           </div>
 
@@ -300,7 +302,7 @@ function App() {
               <ul>
                 <li><Checks /> Explains the lesson goal and desired learner experience</li>
                 <li><Checks /> Listens to voice and music auditions</li>
-                <li><Checks /> Watches animatics, motion pilots, and finished masters</li>
+                <li><Checks /> <GlossaryText>Watches animatics, motion pilots, and finished masters</GlossaryText></li>
                 <li><Checks /> Reports perceptual problems that automation missed</li>
                 <li><Checks /> Approves identities, direction, corrections, and publication</li>
               </ul>
@@ -309,67 +311,68 @@ function App() {
               <div className="responsibility-icon"><HardDrives /></div>
               <h3>What Hermes does on the host</h3>
               <ul>
-                <li><Checks /> Converts messages into scripts, manifests, and production plans</li>
-                <li><Checks /> Operates image, audio, motion, and deterministic tools</li>
+                <li><Checks /> <GlossaryText>Converts messages into scripts, manifests, and production plans</GlossaryText></li>
+                <li><Checks /> <GlossaryText>Operates image, audio, motion, and deterministic tools</GlossaryText></li>
                 <li><Checks /> Preserves rejected evidence and resumes interrupted work</li>
-                <li><Checks /> Runs decode, hash, visual, timing, and delivery checks</li>
-                <li><Checks /> Returns review media and verified artifacts to Telegram</li>
+                <li><Checks /> <GlossaryText>Runs decode, hash, visual, timing, and delivery checks</GlossaryText></li>
+                <li><Checks /> <GlossaryText>Returns review media and verified artifacts to Telegram</GlossaryText></li>
               </ul>
             </article>
           </div>
 
           <div className="phone-loop-callout">
             <TelegramLogo weight="fill" />
-            <p><strong>This is not remote desktop operation.</strong> Jonathan does not sit at the Linux workstation or manually run the production commands. Conversation is the interface. Every important result returns to the same Telegram thread for a human decision.</p>
+            <p><strong>This is not remote desktop operation.</strong> <GlossaryText>Jonathan does not sit at the Linux workstation or manually run the production commands. Conversation is the interface. Every important result returns to the same Telegram thread for a human decision.</GlossaryText></p>
           </div>
         </section>
 
         <section className="tools-section" id="tools">
           <div className="section-heading tools-heading">
             <p className="eyebrow">What runs where</p>
-            <h2>A hybrid studio: owned hardware, local models, and approved API calls.</h2>
-            <p>The pipeline is deliberately split. Heavy repeatable work runs on Jonathan’s own Linux workstation. Hosted services are used where they add leverage, and paid calls are explicit rather than hidden inside the workflow.</p>
+            <h2><GlossaryText>A hybrid studio: owned hardware, local models, and approved API calls.</GlossaryText></h2>
+            <p><GlossaryText>The pipeline is deliberately split. Heavy repeatable work runs on Jonathan’s own Linux workstation. Hosted services are used where they add leverage, and paid API calls are explicit rather than hidden inside the workflow.</GlossaryText></p>
+            <div className="glossary-hint"><Info weight="fill" /><span>Terms with dotted underlines are interactive. Hover with a mouse, focus with a keyboard, or tap on an iPhone for a detailed card.</span></div>
           </div>
 
           <div className="stack-grid">
             <article className="stack-card owned-stack">
               <DeviceMobile weight="duotone" />
-              <div><span>Owned hardware</span><h3>The physical studio</h3></div>
+              <div><span><GlossaryText>Owned hardware</GlossaryText></span><h3>The physical studio</h3></div>
               <ul>
-                <li>Jonathan’s iPhone for direction and review</li>
-                <li>Owned Linux workstation with NVIDIA GPU</li>
-                <li>Local project storage, caches, masters, and evidence</li>
+                <li><GlossaryText>Jonathan’s iPhone for direction and review</GlossaryText></li>
+                <li><GlossaryText>Owned Linux workstation with NVIDIA GPU</GlossaryText></li>
+                <li><GlossaryText>Local project storage, caches, masters, and evidence</GlossaryText></li>
                 <li>No need for Jonathan to operate the workstation directly</li>
               </ul>
             </article>
             <article className="stack-card local-stack">
               <Cpu weight="duotone" />
-              <div><span>Local tools and models</span><h3>No per-call generation fee</h3></div>
+              <div><span><GlossaryText>Local tools and models</GlossaryText></span><h3><GlossaryText>No per-call generation fee</GlossaryText></h3></div>
               <ul>
-                <li>Python, Pillow, FFmpeg, ffprobe, pypinyin, and hashing</li>
-                <li>Whisper for transcript and audio screening</li>
-                <li>FLUX, SAM, IOPaint/LaMa, and local music tools</li>
-                <li>MiniMax-H3-class image-to-video on the owned GPU</li>
+                <li><GlossaryText>Python, Pillow, FFmpeg, ffprobe, pypinyin, and hashing</GlossaryText></li>
+                <li><GlossaryText>Whisper for transcript and audio screening</GlossaryText></li>
+                <li><GlossaryText>FLUX, SAM, IOPaint/LaMa, and local music tools</GlossaryText></li>
+                <li><GlossaryText>MiniMax-H3-class image-to-video on the owned GPU</GlossaryText></li>
               </ul>
             </article>
             <article className="stack-card service-stack">
               <Cloud weight="duotone" />
-              <div><span>Hosted services</span><h3>Transport and publication</h3></div>
+              <div><span><GlossaryText>Hosted services</GlossaryText></span><h3>Transport and publication</h3></div>
               <ul>
-                <li>Telegram carries every instruction and review result</li>
-                <li>Edge TTS provides the selected free voice lane</li>
-                <li>GitHub stores and versions the website source</li>
-                <li>Vercel builds and serves the instructional website</li>
+                <li><GlossaryText>Telegram carries every instruction and review result</GlossaryText></li>
+                <li><GlossaryText>Edge TTS provides the selected free voice lane</GlossaryText></li>
+                <li><GlossaryText>GitHub stores and versions the website source</GlossaryText></li>
+                <li><GlossaryText>Vercel builds and serves the instructional website</GlossaryText></li>
               </ul>
             </article>
             <article className="stack-card paid-stack">
               <CurrencyDollar weight="duotone" />
-              <div><span>Paid hosted intelligence</span><h3>Calls that require authorization</h3></div>
+              <div><span><GlossaryText>Paid hosted intelligence</GlossaryText></span><h3>Calls that require authorization</h3></div>
               <ul>
-                <li>OpenAI’s ChatGPT provides Hermes Agent’s reasoning brain</li>
-                <li>xAI supplies paid image or voice candidates when approved</li>
-                <li>Paid calls are logged, bounded, and checked for real outputs</li>
-                <li>Secrets stay in protected configuration, never in deliverables</li>
+                <li><GlossaryText>OpenAI’s ChatGPT provides Hermes Agent’s reasoning brain</GlossaryText></li>
+                <li><GlossaryText>xAI supplies paid image or voice candidates when approved</GlossaryText></li>
+                <li><GlossaryText>Paid API calls are logged, bounded, and checked for real outputs</GlossaryText></li>
+                <li><GlossaryText>Secrets stay in protected configuration, never in deliverables</GlossaryText></li>
               </ul>
             </article>
           </div>
@@ -377,25 +380,25 @@ function App() {
           <div className="hermes-explainer">
             <div className="hermes-copy">
               <Brain weight="duotone" />
-              <h3>ChatGPT is the brain. Hermes is the operating system around it.</h3>
-              <p>ChatGPT interprets Jonathan’s request, reasons about the next action, reviews tool results, and decides what should happen next. Hermes Agent gives that reasoning model controlled access to the production environment and keeps the work coherent across a long project.</p>
-              <div className="brain-boundary"><LockKey /><span>ChatGPT does not receive raw credentials. Hermes exposes approved tools, applies policy, and returns only the results needed for reasoning.</span></div>
+              <h3><GlossaryText>ChatGPT is the brain. Hermes is the operating system around it.</GlossaryText></h3>
+              <p><GlossaryText>ChatGPT interprets Jonathan’s request, reasons about the next action, reviews tool results, and decides what should happen next. Hermes Agent gives that reasoning model controlled access to the production environment and keeps the work coherent across a long project.</GlossaryText></p>
+              <div className="brain-boundary"><LockKey /><span><GlossaryText>ChatGPT does not receive raw credentials. Hermes exposes approved tools, applies policy, and returns only the results needed for reasoning.</GlossaryText></span></div>
             </div>
             <ol className="hermes-loop">
-              <li><span>1</span><div><strong>Telegram gateway receives the message</strong><p>The correct chat and topic are attached to a persistent Hermes session.</p></div></li>
-              <li><span>2</span><div><strong>Hermes loads working context</strong><p>Project history, current approvals, skills, memory, and relevant files become available.</p></div></li>
-              <li><span>3</span><div><strong>ChatGPT reasons and chooses tools</strong><p>It may inspect files, run code, call a model, delegate an audit, or ask Jonathan only when a real decision is missing.</p></div></li>
-              <li><span>4</span><div><strong>Hermes executes on the host</strong><p>Tools operate the filesystem, terminal, browsers, media pipelines, GitHub, Vercel, and explicitly authorized APIs.</p></div></li>
-              <li><span>5</span><div><strong>Evidence comes back into the reasoning loop</strong><p>Hashes, decodes, screenshots, contact sheets, transcripts, and errors are reviewed before the next action.</p></div></li>
-              <li><span>6</span><div><strong>Jonathan receives a reviewable result</strong><p>Telegram delivers samples, progress, files, blockers, and approval questions directly to the iPhone.</p></div></li>
+              <li><span>1</span><div><strong><GlossaryText>Telegram gateway receives the message</GlossaryText></strong><p><GlossaryText>The correct chat and topic are attached to a persistent Hermes session.</GlossaryText></p></div></li>
+              <li><span>2</span><div><strong><GlossaryText>Hermes loads working context</GlossaryText></strong><p>Project history, current approvals, skills, memory, and relevant files become available.</p></div></li>
+              <li><span>3</span><div><strong><GlossaryText>ChatGPT reasons and chooses tools</GlossaryText></strong><p><GlossaryText>It may inspect files, run code, call a model, delegate an audit, or ask Jonathan only when a real decision is missing.</GlossaryText></p></div></li>
+              <li><span>4</span><div><strong><GlossaryText>Hermes executes on the host</GlossaryText></strong><p><GlossaryText>Tools operate the filesystem, terminal, browsers, media pipelines, GitHub, Vercel, and explicitly authorized APIs.</GlossaryText></p></div></li>
+              <li><span>5</span><div><strong>Evidence comes back into the reasoning loop</strong><p><GlossaryText>Hashes, decodes, screenshots, contact sheets, transcripts, and errors are reviewed before the next action.</GlossaryText></p></div></li>
+              <li><span>6</span><div><strong>Jonathan receives a reviewable result</strong><p><GlossaryText>Telegram delivers samples, progress, files, blockers, and approval questions directly to the iPhone.</GlossaryText></p></div></li>
             </ol>
           </div>
 
           <div className="management-grid">
-            <div><FolderOpen /><strong>Project state</strong><span>Folders, manifests, stable IDs, hashes, caches, selected assets, and superseded versions</span></div>
-            <div><Wrench /><strong>Production work</strong><span>Image, speech, music, motion, compositing, subtitles, encoding, packaging, and deployment</span></div>
-            <div><Checks /><strong>Quality evidence</strong><span>Decode reports, ASR, frame contracts, contact sheets, visual verdicts, and uninterrupted-review gates</span></div>
-            <div><LockKey /><strong>Approval boundaries</strong><span>Hermes may prepare and qualify. Jonathan alone approves taste, major spend, motion direction, and publication.</span></div>
+            <div><FolderOpen /><strong>Project state</strong><span><GlossaryText>Folders, manifests, stable IDs, hashes, caches, selected assets, and superseded versions</GlossaryText></span></div>
+            <div><Wrench /><strong>Production work</strong><span><GlossaryText>Image, speech, music, motion, compositing, subtitles, encoding, packaging, and deployment</GlossaryText></span></div>
+            <div><Checks /><strong>Quality evidence</strong><span><GlossaryText>Decode reports, ASR, frame contracts, contact sheets, visual verdicts, and uninterrupted-review gates</GlossaryText></span></div>
+            <div><LockKey /><strong>Approval boundaries</strong><span><GlossaryText>Hermes may prepare and qualify. Jonathan alone approves taste, major spend, motion direction, and publication.</GlossaryText></span></div>
           </div>
         </section>
 
@@ -403,7 +406,7 @@ function App() {
           <div className="section-heading">
             <p className="eyebrow">The operating model</p>
             <h2>A film is not one generation.</h2>
-            <p>Generative tools propose appearance and motion. Deterministic systems establish text, timing, compositing, and authority. Humans approve meaning, taste, and release.</p>
+            <p><GlossaryText>Generative tools propose appearance and motion. Deterministic systems establish text, timing, compositing, and canonical authority. Humans approve meaning, taste, and release.</GlossaryText></p>
           </div>
           <div className="course-layout">
             <aside className="lesson-index" aria-label="Course lessons">
@@ -420,9 +423,9 @@ function App() {
                   <div className="step-index">{String(index + 1).padStart(2, '0')}</div>
                   <div>
                     <h3>{step.name}</h3>
-                    <p>{step.detail}</p>
+                    <p><GlossaryText>{step.detail}</GlossaryText></p>
                   </div>
-                  <span className="step-output">{step.output}</span>
+                  <span className="step-output"><GlossaryText>{step.output}</GlossaryText></span>
                 </article>
               ))}
             </div>
@@ -432,29 +435,29 @@ function App() {
         <section className="authority-section" id="authority">
           <div className="section-heading compact">
             <h2>Separate identity from scene invention.</h2>
-            <p>Once presenters are approved, image generation should build the world around them, not redraw them in every scene.</p>
+            <p><GlossaryText>Once presenters are approved, image generation should build the world around them, not redraw them in every scene.</GlossaryText></p>
           </div>
           <div className="authority-grid">
             <figure className="authority-card authority-main">
               <img src="/media/character-authority.webp" alt="Approved full-body Linlin and Xiaowei character authority" loading="lazy" />
-              <figcaption><strong>Character authority</strong><span>Identity is approved once and hash-bound.</span></figcaption>
+              <figcaption><strong>Character authority</strong><span><GlossaryText>Identity is approved once and hash-bound.</GlossaryText></span></figcaption>
             </figure>
             <figure className="authority-card">
               <img src="/media/xai-environment.webp" alt="Umbrella and sun paper theater environment generated without Linlin or Xiaowei" loading="lazy" />
-              <figcaption><strong>xAI environment plate</strong><span>The scene and semantic props arrive without recurring presenters.</span></figcaption>
+              <figcaption><strong><GlossaryText>xAI environment plate</GlossaryText></strong><span>The scene and semantic props arrive without recurring presenters.</span></figcaption>
             </figure>
             <figure className="authority-card">
               <img src="/media/canonical-composite.webp" alt="The same umbrella and sun environment with exact approved Linlin and Xiaowei cutouts added at the sides" loading="lazy" />
-              <figcaption><strong>Deterministic composite</strong><span>The same plate now contains the exact approved presenters.</span></figcaption>
+              <figcaption><strong><GlossaryText>Deterministic composite</GlossaryText></strong><span>The same plate now contains the exact approved presenters.</span></figcaption>
             </figure>
           </div>
           <div className="rule-callout">
             <ShieldCheck weight="duotone" />
-            <div><strong>Generated text is never authoritative.</strong><p>Chinese, pinyin, titles, labels, calendar days, and quiz answers are rendered locally after the artwork is approved.</p></div>
+            <div><strong>Generated text is never authoritative.</strong><p><GlossaryText>Chinese, pinyin, titles, labels, calendar days, and quiz answers are rendered locally after the artwork is approved.</GlossaryText></p></div>
           </div>
           <figure className="overview-figure">
             <img src="/media/keyframe-overview.webp" alt="Chronological overview of thirteen canonical paper theater keyframes" loading="lazy" />
-            <figcaption>One chronological contact sheet exposes identity drift, missing semantics, count failures, and unsafe subtitle composition before animation begins.</figcaption>
+            <figcaption><GlossaryText>One chronological contact sheet exposes identity drift, missing semantics, count failures, and unsafe subtitle composition before animation begins.</GlossaryText></figcaption>
           </figure>
         </section>
 
@@ -462,12 +465,12 @@ function App() {
           <div className="audio-copy">
             <div className="section-heading compact">
               <h2>Audition on the same line.</h2>
-              <p>Provider comparisons are useful only when text, playback loudness, format, and evaluation conditions match.</p>
+              <p><GlossaryText>Provider comparisons are useful only when text, playback loudness, format, and evaluation conditions match.</GlossaryText></p>
             </div>
             <div className="audio-principles">
               <div><span>01</span><p>Use one representative Mandarin line per character.</p></div>
-              <div><span>02</span><p>Level-match, decode, transcribe, and listen.</p></div>
-              <div><span>03</span><p>Record the chosen voice and exact file hash.</p></div>
+              <div><span>02</span><p><GlossaryText>Level-match, decode, transcribe, and listen.</GlossaryText></p></div>
+              <div><span>03</span><p><GlossaryText>Record the chosen voice and exact file hash.</GlossaryText></p></div>
             </div>
           </div>
           <div className="audio-lab">
@@ -504,9 +507,9 @@ function App() {
           <div className="animatic-stage" id="examples">
             <div className="animatic-copy">
               <h3>Approve the static film before motion.</h3>
-              <p>This inexpensive gate combines final voices, real timing, deterministic subtitles, music, transitions, and quiz holds.</p>
+              <p><GlossaryText>This inexpensive gate combines final voices, real timing, deterministic subtitles, music, transitions, and quiz holds.</GlossaryText></p>
               <ul>
-                <li><Check /> Full decode and stream contract</li>
+                <li><Check /> <GlossaryText>Full decode and stream contract</GlossaryText></li>
                 <li><Check /> Every sentence start and end sampled</li>
                 <li><Check /> Every transition inspected</li>
                 <li><Check /> Complete contextual human review</li>
@@ -521,7 +524,7 @@ function App() {
         <section className="motion-section" id="motion">
           <div className="section-heading compact">
             <h2>Motion is a short, reviewable asset.</h2>
-            <p>Pilot difficult actions first. Strip native model audio, verify the first frame, inspect five temporal samples, and bind the verdict to the clip hash.</p>
+            <p><GlossaryText>Pilot difficult actions first. Strip native model audio, verify the first frame, inspect five temporal samples, and bind the visual verdict to the clip hash.</GlossaryText></p>
           </div>
           <div className="motion-showcase">
             <figure>
@@ -538,7 +541,7 @@ function App() {
           <div className="repair-lab">
             <div className="repair-copy">
               <h3>When generation fails, change the method.</h3>
-              <p>The closing shot moved wall icons that had to remain pinned. After prompt and seed attempts failed, deterministic masking preserved valid character gestures while freezing every guarded background pixel.</p>
+              <p><GlossaryText>The closing shot moved wall icons that had to remain pinned. After prompt and seed attempts failed, deterministic masking preserved valid character gestures while freezing every guarded background pixel.</GlossaryText></p>
               <div className="repair-tabs" role="tablist" aria-label="Failure and repair comparison">
                 <button className={comparison === 'failed' ? 'active' : ''} type="button" onClick={() => setComparison('failed')} role="tab" aria-selected={comparison === 'failed'}>Failed generation</button>
                 <button className={comparison === 'repaired' ? 'active' : ''} type="button" onClick={() => setComparison('repaired')} role="tab" aria-selected={comparison === 'repaired'}>Deterministic repair</button>
@@ -573,14 +576,14 @@ function App() {
                 <span className="gate-number">{String(index + 1).padStart(2, '0')}</span>
                 <GateVisual kind={kind} />
                 <h3>{name}</h3>
-                <p>{detail}</p>
+                <p><GlossaryText>{detail}</GlossaryText></p>
               </article>
             ))}
           </div>
           <div className="qa-split">
             <div>
               <h3>Automatic evidence</h3>
-              <p>Existence, magic bytes, decode, dimensions, frame count, audio format, loudness, hashes, contact-sheet production, black frames, and freeze intervals.</p>
+              <p><GlossaryText>Existence, magic bytes, decode, dimensions, frame count, audio format, loudness, hashes, contact-sheet production, black frames, and freeze intervals.</GlossaryText></p>
             </div>
             <div>
               <h3>Reviewer judgment</h3>
@@ -593,7 +596,7 @@ function App() {
           <div>
             <BookOpenText weight="duotone" />
             <h2>Keep the full field manual.</h2>
-            <p>The website teaches through media. The editable manual remains the detailed operating reference for manifests, state transitions, commands, recovery, and delivery contracts.</p>
+            <p><GlossaryText>The website teaches through media. The editable manual remains the detailed operating reference for manifests, state transitions, commands, recovery, and delivery contracts.</GlossaryText></p>
           </div>
           <div className="download-actions">
             <a className="download-card" href="/downloads/Paper_Cut_Chinese_Grammar_Video_Production_Manual_v1.3.pdf" download>

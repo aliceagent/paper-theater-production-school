@@ -1,0 +1,52 @@
+# Paper Theater Production School
+
+A media-rich instructional website for producing polished paper-cut Mandarin grammar films.
+
+The course is built from two real HSK 3 productions and demonstrates:
+
+- lesson and semantic-scene planning;
+- character authority and xAI environment generation;
+- deterministic character compositing and subtitle rendering;
+- free-versus-paid Mandarin voice auditions;
+- content-derived timing and static animatic approval;
+- image-to-video pilots, hash-bound QA, failure evidence, and deterministic repair;
+- human approval gates for language, identity, motion, editorial quality, and publication.
+
+## Local development
+
+```bash
+npm install
+npm run dev
+```
+
+## Verification
+
+```bash
+npx -y @google/design.md lint DESIGN.md
+npm run lint
+npm run build
+npm run preview -- --host 127.0.0.1 --port 4173
+npm run qa
+```
+
+The QA runner uses the installed Chromium binary at `/snap/bin/chromium`. Change `executablePath` in `scripts/qa.mjs` when running elsewhere.
+
+## Design system
+
+`DESIGN.md` is the visual source of truth. The production interface uses:
+
+- React 19 and TypeScript;
+- Vite 8;
+- native responsive CSS with light and dark tokens;
+- Phosphor icons;
+- curated, compressed WebP, MP3, and H.264 teaching media.
+
+## Media status
+
+The approved and published `又……又……` film supplies the final-film and motion examples. The `我还以为……，没想到……` project supplies the character, environment, keyframe, audition, and static-animatic examples. Its motion stage remains unauthorized.
+
+No credentials, API keys, or private connection data are included.
+
+## Licensing
+
+Site source code is MIT licensed. Embedded production media and downloadable manual remain copyright Jonathan Caras unless separately licensed.
